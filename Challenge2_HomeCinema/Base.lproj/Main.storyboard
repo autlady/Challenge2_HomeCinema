@@ -105,6 +105,19 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Exit" title=" "/>
+                                <connections>
+                                    <action selector="backButtonTapped:" destination="G5D-PE-ZqY" eventType="touchUpInside" id="FoM-cr-BS3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kit-sd-UpG">
+                                <rect key="frame" x="180" y="831" width="56" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Back"/>
+                                <connections>
+                                    <action selector="backButtonTapped:" destination="G5D-PE-ZqY" eventType="touchUpInside" id="4eK-b4-XoM"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="O9X-2C-RB6"/>
@@ -112,6 +125,8 @@
                     </view>
                     <connections>
                         <outlet property="actorCollectionView" destination="IAF-Bp-QQR" id="Keq-AI-ICm"/>
+                        <outlet property="movieOverview" destination="kfZ-Q8-yIQ" id="vqX-nX-Icz"/>
+                        <outlet property="movieTitle" destination="njm-Qx-haI" id="Qub-XV-1lF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uGv-Lo-EOy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
