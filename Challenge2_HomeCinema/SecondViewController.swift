@@ -10,19 +10,48 @@ import UIKit
 class SecondViewController: UIViewController {
     
     
-}
-
-extension SecondViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // количество рядов у таблицы
-        return 3
+    @IBOutlet weak var actorCollectionView: UICollectionView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+//        view.backgroundColor = .black
+        actorCollectionView.dataSource = self
+        actorCollectionView.delegate = self
+        actorCollectionView.register(ActorsCollectionViewCell.self, forCellWithReuseIdentifier: "ActorsCollectionViewCell") //регистрирую ячейку
+        
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        //создаем ячейку
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
-
-       return cell
 }
+
+extension SecondViewController: UICollectionViewDelegateFlowLayout {
+    private var sideInset: CGFloat { return 8 }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        // настраиваю размер ячеек
+        let width = (collectionView.bounds.width - sideInset * 3) / 4
+        return CGSize(width: width, height: width)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+
+        // настраиваю отступы между ячейками
+        sideInset
+    }
+}
+
+extension SecondViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+
+        // количество ячеек
+        12
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        // создаю ячейку
+
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActorsCollectionViewCell", for: indexPath) as! ActorsCollectionViewCell
+        cell.setupCell()
+        return cell
+    }
 }
