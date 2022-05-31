@@ -110,6 +110,12 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U0o-9e-gso">
+                                <rect key="frame" x="20" y="44" width="66" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Exit"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="O9X-2C-RB6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -121,6 +127,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Exit" width="42" height="42"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
