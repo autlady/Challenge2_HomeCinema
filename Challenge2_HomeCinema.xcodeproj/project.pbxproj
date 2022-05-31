@@ -10,6 +10,7 @@
 		4BC2BF6B2845096D00126991 /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC2BF6A2845096D00126991 /* Film.swift */; };
 		4BC2BF6F28450C7200126991 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC2BF6E28450C7200126991 /* TableViewCell.swift */; };
 		4BC2BF7128450F9700126991 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC2BF7028450F9700126991 /* CollectionViewCell.swift */; };
+		B4885B4128461FEC00A8CD0E /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4885B4028461FEC00A8CD0E /* SecondViewController.swift */; };
 		B4C32FE52844A4AB00362025 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C32FE42844A4AB00362025 /* AppDelegate.swift */; };
 		B4C32FE72844A4AB00362025 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C32FE62844A4AB00362025 /* SceneDelegate.swift */; };
 		B4C32FE92844A4AB00362025 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C32FE82844A4AB00362025 /* StartViewController.swift */; };
@@ -22,6 +23,7 @@
 		4BC2BF6A2845096D00126991 /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
 		4BC2BF6E28450C7200126991 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		4BC2BF7028450F9700126991 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		B4885B4028461FEC00A8CD0E /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SecondViewController.swift; path = Challenge2_HomeCinema/SecondViewController.swift; sourceTree = SOURCE_ROOT; };
 		B4C32FE12844A4AB00362025 /* Challenge2_HomeCinema.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Challenge2_HomeCinema.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4C32FE42844A4AB00362025 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4C32FE62844A4AB00362025 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				B4C32FE82844A4AB00362025 /* StartViewController.swift */,
+				B4885B4028461FEC00A8CD0E /* SecondViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 				B4C32FE92844A4AB00362025 /* StartViewController.swift in Sources */,
 				4BC2BF7128450F9700126991 /* CollectionViewCell.swift in Sources */,
 				4BC2BF6B2845096D00126991 /* Film.swift in Sources */,
+				B4885B4128461FEC00A8CD0E /* SecondViewController.swift in Sources */,
 				B4C32FE52844A4AB00362025 /* AppDelegate.swift in Sources */,
 				B4C32FE72844A4AB00362025 /* SceneDelegate.swift in Sources */,
 			);
