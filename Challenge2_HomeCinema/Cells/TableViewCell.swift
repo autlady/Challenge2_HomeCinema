@@ -45,11 +45,12 @@ class TableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             title.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset),
             title.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+//            title.heightAnchor.constraint(equalToConstant: 30),
             filmCollection.topAnchor.constraint(equalTo: title.bottomAnchor, constant: inset),
             filmCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             filmCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
             filmCollection.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset),
-            filmCollection.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.25)
+//            filmCollection.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.25)
         ])
     }
 }
@@ -60,8 +61,8 @@ extension TableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         // настраиваю размер ячеек
-        let width = (collectionView.bounds.width - sideInset * 3) / 4
-        return CGSize(width: width, height: width)
+        let width = (collectionView.bounds.width - sideInset * 2) / 2.5
+        return CGSize(width: width, height: width * 1.5)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -84,6 +85,8 @@ extension TableViewCell: UICollectionViewDataSource {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
         cell.setupCell()
+        cell.layer.cornerRadius = 60
+        cell.clipsToBounds = true
         return cell
     }
 }
