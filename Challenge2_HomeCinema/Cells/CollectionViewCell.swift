@@ -19,7 +19,7 @@ class CollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    private lazy var nameLable: UILabel = {
+    private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .black
@@ -30,7 +30,7 @@ class CollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var dateLable: UILabel = {
+    private lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .black
@@ -54,28 +54,28 @@ class CollectionViewCell: UICollectionViewCell {
 
     private func layout() {
         contentView.addSubview(photoView)
-        contentView.addSubview(nameLable)
-        contentView.addSubview(dateLable)
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(dateLabel)
 
 
         
         NSLayoutConstraint.activate([
-            dateLable.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            dateLable.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            dateLable.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            dateLable.heightAnchor.constraint(equalToConstant: 20),
+            dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            dateLabel.heightAnchor.constraint(equalToConstant: 20),
             
-            nameLable.bottomAnchor.constraint(equalTo: dateLable.topAnchor),
-            nameLable.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            nameLable.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            dateLable.heightAnchor.constraint(equalToConstant: 20)
+            nameLabel.bottomAnchor.constraint(equalTo: dateLabel.topAnchor),
+            nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            dateLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
         
         NSLayoutConstraint.activate([
             photoView.topAnchor.constraint(equalTo: contentView.topAnchor),
             photoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             photoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            photoView.bottomAnchor.constraint(equalTo: nameLable.topAnchor)
+            photoView.bottomAnchor.constraint(equalTo: nameLabel.topAnchor)
         ])
     }
 

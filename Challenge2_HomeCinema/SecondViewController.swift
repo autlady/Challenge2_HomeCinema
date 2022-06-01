@@ -18,15 +18,22 @@ class SecondViewController: UIViewController {
     
     @IBOutlet weak var movieOverview: UITextView!
     
-    @IBAction func backButtonTapped(_ sender: UIButton) {
+
+
+    @IBAction func closeButtonTapped(_ sender: UIButton) {
+    }
+
+    @IBAction func watchButtonTapped(_ sender: UIButton) {
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        view.backgroundColor = .black
+        view.backgroundColor = .black
         actorCollectionView.dataSource = self
         actorCollectionView.delegate = self
         actorCollectionView.register(ActorsCollectionViewCell.self, forCellWithReuseIdentifier: "ActorsCollectionViewCell") //регистрирую ячейку
+        actorCollectionView.backgroundColor = .black
+        movieOverview.backgroundColor = .black
         
     }
     
@@ -84,7 +91,7 @@ extension SecondViewController: UICollectionViewDelegateFlowLayout {
         
         // настраиваю размер ячеек
         let width = (collectionView.bounds.width - sideInset * 4) / 5
-        return CGSize(width: width, height: width)
+        return CGSize(width: width, height: width * 1.5)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
