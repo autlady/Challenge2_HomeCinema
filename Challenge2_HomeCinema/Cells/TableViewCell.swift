@@ -9,18 +9,20 @@ import UIKit
 
 class TableViewCell: UITableViewCell {
 
-    private lazy var title: UILabel = { // создаю лейбл
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 24, weight: .bold)
-        label.text = "Popular Movie"
-        return label
-    }()
+//    private lazy var title: UILabel = { // создаю лейбл
+//        let label = UILabel()
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.font = .systemFont(ofSize: 24, weight: .bold)
+//        label.text = "Popular Movie"
+//        label.textColor = .white
+//        return label
+//    }()
 
     private lazy var filmCollection: UICollectionView = { //создаю collectionview
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .black
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -30,6 +32,7 @@ class TableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.backgroundColor = .black
         setupView()
     }
 
@@ -38,15 +41,19 @@ class TableViewCell: UITableViewCell {
     }
 
     private func setupView() {
-        [title, filmCollection].forEach { contentView.addSubview($0) }
+//        [title, filmCollection].forEach { contentView.addSubview($0) }
 
+        
+        contentView.addSubview(filmCollection)
+        
         let inset: CGFloat = 12
 
         NSLayoutConstraint.activate([
-            title.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset),
-            title.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
+//            title.topAnchor.constraint(equalTo: contentView.topAnchor, constant: inset),
+//            title.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
 //            title.heightAnchor.constraint(equalToConstant: 30),
-            filmCollection.topAnchor.constraint(equalTo: title.bottomAnchor, constant: inset),
+//            filmCollection.topAnchor.constraint(equalTo: title.bottomAnchor, constant: inset),
+            filmCollection.topAnchor.constraint(equalTo: contentView.topAnchor),
             filmCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
             filmCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
             filmCollection.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset),
@@ -85,8 +92,6 @@ extension TableViewCell: UICollectionViewDataSource {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
         cell.setupCell()
-        cell.layer.cornerRadius = 60
-        cell.clipsToBounds = true
         return cell
     }
 }
