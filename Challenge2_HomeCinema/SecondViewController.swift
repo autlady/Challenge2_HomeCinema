@@ -83,7 +83,7 @@ extension SecondViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         // настраиваю размер ячеек
-        let width = (collectionView.bounds.width - sideInset * 3) / 4
+        let width = (collectionView.bounds.width - sideInset * 4) / 5
         return CGSize(width: width, height: width)
     }
     

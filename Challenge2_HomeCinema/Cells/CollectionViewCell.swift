@@ -13,13 +13,15 @@ class CollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 6
+//        imageView.clipsToBounds = true
+//        imageView.layer.cornerRadius = 6
+        imageView.sizeToFit()
         return imageView
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = .gray
         layout()
     }
 
@@ -40,6 +42,7 @@ class CollectionViewCell: UICollectionViewCell {
 
     func setupCell() {
         photoView.image = UIImage(named: "film")
+        
     }
 }
 
