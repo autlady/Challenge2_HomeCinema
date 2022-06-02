@@ -20,13 +20,15 @@ class StartViewController: UIViewController {
         tableView.backgroundColor = .black
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.sectionHeaderHeight = UITableView.automaticDimension
+        tableView.estimatedSectionHeaderHeight = 30
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell") //регистрирую ячейку
         setupButtonsBar()
         
         
     }
     
-    private lazy var titleView: UILabel = { // создаю лейбл
+    private lazy var titleView: UILabel = {
         let label = UILabel()
         label.backgroundColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -89,6 +91,8 @@ extension StartViewController: UITableViewDataSource, UITableViewDelegate {
         self.view.bounds.height/3
     }
 
+
+
     // почему-то не работает с первым и вторым хидером
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
@@ -110,6 +114,6 @@ extension StartViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
     }
-    
+
 }
 

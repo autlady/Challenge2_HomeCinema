@@ -16,7 +16,7 @@ class ActorsCollectionViewCell: UICollectionViewCell {
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 37
+        imageView.layer.cornerRadius = self.frame.width/2.0
         return imageView
     }()
 
@@ -31,7 +31,7 @@ class ActorsCollectionViewCell: UICollectionViewCell {
         return label
     }()
 
-    private lazy var dateLabel: UILabel = {
+    private lazy var roleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .black
@@ -54,20 +54,20 @@ class ActorsCollectionViewCell: UICollectionViewCell {
     private func layout() {
         contentView.addSubview(photoView)
         contentView.addSubview(nameLabel)
-        contentView.addSubview(dateLabel)
+        contentView.addSubview(roleLabel)
 
 
 
         NSLayoutConstraint.activate([
-            dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            dateLabel.heightAnchor.constraint(equalToConstant: 20),
+            roleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            roleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            roleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            roleLabel.heightAnchor.constraint(equalToConstant: 20),
 
-            nameLabel.bottomAnchor.constraint(equalTo: dateLabel.topAnchor),
+            nameLabel.bottomAnchor.constraint(equalTo: roleLabel.topAnchor),
             nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            dateLabel.heightAnchor.constraint(equalToConstant: 20)
+            nameLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
 
         NSLayoutConstraint.activate([

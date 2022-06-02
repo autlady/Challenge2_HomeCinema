@@ -10,7 +10,8 @@ import UIKit
 class SecondViewController: UIViewController {
     
     
-
+    @IBOutlet weak var filmImageView: UIImageView!
+    
     
     @IBOutlet weak var actorCollectionView: UICollectionView!
     
@@ -36,49 +37,9 @@ class SecondViewController: UIViewController {
         movieOverview.backgroundColor = .black
         
     }
-    
-    lazy var imageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "film"))
-        imageView.layer.borderWidth = 3.0
-        imageView.layer.borderColor = UIColor.white.cgColor
-        imageView.layer.cornerRadius = 70
-        imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    lazy var labelStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        stackView.spacing = 40
-        return stackView
-    }()
-    
-    lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.spacing = 16
-        return stackView
-    }()
-    
-    lazy var fullNameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "filmNumber1"
-        label.textColor = .black
-        label.font = UIFont(name: "Helvetica-Bold", size: 18)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    
-    func drawSelf() {
-        self.stackView.addArrangedSubview(imageView)
-        self.stackView.addArrangedSubview(fullNameLabel)
-    }
 }
+    
+
 
 
     // MARK: - extensions
