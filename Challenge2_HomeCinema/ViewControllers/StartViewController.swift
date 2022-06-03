@@ -11,6 +11,7 @@ class StartViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var titles = ["Popular", "TV Shows", "Continue watching"]
 
     //    var films: [Film] = []
     
@@ -20,24 +21,12 @@ class StartViewController: UIViewController {
         tableView.backgroundColor = .black
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.sectionHeaderHeight = UITableView.automaticDimension
-        tableView.estimatedSectionHeaderHeight = 30
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell") //регистрирую ячейку
+        tableView.register(HeaderView.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
         setupButtonsBar()
         
-        
     }
-    
-    private lazy var titleView: UILabel = {
-        let label = UILabel()
-        label.backgroundColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 24, weight: .bold)
-        label.text = "some"
-        label.textColor = .white
-        return label
-    }()
-    
+
     private lazy var buttonsBar: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -92,28 +81,12 @@ extension StartViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
 
-
-    // почему-то не работает с первым и вторым хидером
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
-        switch section {
-        case 0:
-            let header = titleView
-            header.text = "Popular"
-            return header
-        case 1:
-            let header = titleView
-            header.text = "TV Shows"
-            return header
-        case 2:
-            let header = titleView
-            header.text = "Continue watching"
-            return header
-        default:
-            return titleView
-        }
-
+        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "sectionHeader") as! HeaderView
+        view.titleLabel.text = titles[section]
+        return view
+    }
     }
 
-}
+
 

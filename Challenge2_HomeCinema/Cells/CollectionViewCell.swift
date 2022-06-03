@@ -56,8 +56,6 @@ class CollectionViewCell: UICollectionViewCell {
         contentView.addSubview(photoView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(dateLabel)
-
-
         
         NSLayoutConstraint.activate([
             dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
