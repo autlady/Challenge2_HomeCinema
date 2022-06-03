@@ -9,17 +9,17 @@ import UIKit
 
 class SecondViewController: UIViewController {
     
+    var networkManager = NetworkManager()
+    
+    var urlPoster = ""
     
     @IBOutlet weak var filmImageView: UIImageView!
-    
     
     @IBOutlet weak var actorCollectionView: UICollectionView!
     
     @IBOutlet weak var movieTitle: UILabel!
     
     @IBOutlet weak var movieOverview: UITextView!
-    
-
 
     @IBAction func closeButtonTapped(_ sender: UIButton) {
     }
@@ -36,10 +36,31 @@ class SecondViewController: UIViewController {
         actorCollectionView.backgroundColor = .black
         movieOverview.backgroundColor = .black
         
+        //networkManager.delegate = self
+        
+        networkManager.fetchFilmInfo(idMovie: 98) { (result) in
+            switch result {
+            case .success(let FilmData):
+                self.movieTitle.text = FilmData.title
+                self.movieOverview.text = FilmData.overview
+                self.urlPoster = FilmData.poster
+                
+                self.networkManager.getImageFilm(urlImage: self.urlPoster) { (result) in
+                    switch result {
+                    case .success(let data):
+                        print("urlPoster getImageFilm - \(self.urlPoster)")
+                        self.filmImageView.image = UIImage (data: data)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
     }
 }
-    
-
 
 
     // MARK: - extensions
@@ -78,3 +99,21 @@ extension SecondViewController: UICollectionViewDataSource {
         return cell
     }
 }
+
+
+////MARK: - FilmInfoManagerDelegate
+//
+//extension SecondViewController: FilmInfoManagerDelegate {
+//
+//    func  didUpdateFilmInfo(_ networkManager: NetworkManager, filmInfo: FilmData) {
+//
+//        DispatchQueue.main.async {
+//            self.movieTitle.text = filmInfo.title
+//            self.movieOverview.text = filmInfo.overview
+//        }
+//    }
+//
+//    func didFailWithError(error: Error) {
+//        print(error)
+//    }
+//}

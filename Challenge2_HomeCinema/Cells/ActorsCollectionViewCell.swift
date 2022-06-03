@@ -9,6 +9,10 @@ import UIKit
 
 class ActorsCollectionViewCell: UICollectionViewCell {
     
+    var networkManager = NetworkManager()
+    
+    var urlActors = "https://image.tmdb.org/t/p/w200/5fZ1JiGfVshoLHwgvdF3TY4bPem.jpg"
+    
     lazy var photoView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -79,7 +83,15 @@ class ActorsCollectionViewCell: UICollectionViewCell {
     }
 
     func setupCell() {
-        photoView.image = UIImage(named: "film")
+        self.networkManager.getImageFilm(urlImage: self.urlActors) { (result) in
+            switch result {
+            case .success(let data):
+                print("urlPoster getImageFilm - \(self.urlActors)")
+                self.photoView.image = UIImage (data: data)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 
