@@ -25,6 +25,7 @@ class SecondViewController: UIViewController {
     }
 
     @IBAction func watchButtonTapped(_ sender: UIButton) {
+        UIApplication.shared.open(NSURL(string: "https://www.themoviedb.org/movie/18-the-fifth-element")! as URL)
     }
     
     override func viewDidLoad() {
