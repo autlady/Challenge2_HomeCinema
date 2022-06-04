@@ -17,6 +17,10 @@ class SecondViewController: UIViewController {
     
     var idMovie = 0
     
+    var originalFilmUrl = "https://www.themoviedb.org/movie/"
+    
+    var originalShowUrl = "https://www.themoviedb.org/tv/"
+    
     //var filmActorsDataArray = [Cast]()
     
     @IBOutlet weak var filmImageView: UIImageView!
@@ -29,11 +33,12 @@ class SecondViewController: UIViewController {
 
     @IBAction func closeButtonTapped(_ sender: UIButton) {
     }
-
+    
+// Переход на сайт фильма при нажатии на кнопку "Watch now"
+    
     @IBAction func watchButtonTapped(_ sender: UIButton) {
-        UIApplication.shared.open(NSURL(string: "https://www.themoviedb.org/movie/18-the-fifth-element")! as URL)
+        UIApplication.shared.open(URL(string: originalFilmUrl + "\(idMovie)")! as URL, options: [:], completionHandler: nil)
     }
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
