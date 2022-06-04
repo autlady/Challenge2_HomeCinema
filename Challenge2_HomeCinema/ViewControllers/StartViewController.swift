@@ -17,7 +17,7 @@ class StartViewController: UIViewController {
     
     //var countTopFilms = 0
 
-    //    var films: [Film] = []
+    var films = [Films]()
     
     var idMovie = 0
     
@@ -39,6 +39,7 @@ class StartViewController: UIViewController {
         tableView.register(HeaderView.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
         setupButtonsBar()
         
+
         
 //        networkManager.fetchFilmTop { (result) in
 //            switch result {
@@ -51,6 +52,7 @@ class StartViewController: UIViewController {
 //                print(error)
 //            }
 //        }
+
         
     }
 
@@ -82,6 +84,7 @@ class StartViewController: UIViewController {
         ])
     }
     
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToDetail" {
             if let destinationVC = segue.destination as? SecondViewController {
@@ -91,8 +94,11 @@ class StartViewController: UIViewController {
             
         }
     }
+
     
 }
+
+
 
 extension StartViewController: UITableViewDataSource, UITableViewDelegate {
     

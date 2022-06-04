@@ -80,12 +80,14 @@ class ActorsCollectionViewCell: UICollectionViewCell {
         ])
     }
 
+
     func setupCell(indexCell: Int, idMovie: Int) {
 
         self.networkManager.fetchFilmActors(idMovie: idMovie) { (result) in
             switch result {
 
             case .success(let FilmActorsData):
+ 
 
                 self.nameLabel.text = FilmActorsData.cast[indexCell].name
                 self.roleLabel.text = FilmActorsData.cast[indexCell].character

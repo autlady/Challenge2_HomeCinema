@@ -7,10 +7,10 @@
 
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell {
-    
-    var networkManager = NetworkManager()
 
+class CollectionViewCell: UICollectionViewCell, UICollectionViewDataSource {
+
+var networkManager = NetworkManager()
     lazy var photoView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -21,7 +21,7 @@ class CollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    private lazy var nameLabel: UILabel = {
+    lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .black
@@ -32,7 +32,7 @@ class CollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var dateLabel: UILabel = {
+    lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .black
@@ -69,6 +69,7 @@ class CollectionViewCell: UICollectionViewCell {
             nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             dateLabel.heightAnchor.constraint(equalToConstant: 20)
+            //MARK: здесь нужно было nameLabel ? или dateLabel
         ])
         
         NSLayoutConstraint.activate([
@@ -78,6 +79,7 @@ class CollectionViewCell: UICollectionViewCell {
             photoView.bottomAnchor.constraint(equalTo: nameLabel.topAnchor)
         ])
     }
+
 
     func setupCell(indexCell: Int) {
         self.networkManager.fetchFilmTop { (result) in
@@ -101,6 +103,11 @@ class CollectionViewCell: UICollectionViewCell {
                 print(error)
             }
         }        
+
     }
+    
+    
+    
+    
 }
 
