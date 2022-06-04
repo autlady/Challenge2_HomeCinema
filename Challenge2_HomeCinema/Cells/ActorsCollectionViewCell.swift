@@ -80,23 +80,16 @@ class ActorsCollectionViewCell: UICollectionViewCell {
         ])
     }
 
-//    func setupCell(indexCell: Int, nameActor: String, characterActor: String) {
-    func setupCell(indexCell: Int) {
-        
-        self.networkManager.fetchFilmActors(idMovie: 98) { (result) in
+    func setupCell(indexCell: Int, idMovie: Int) {
+
+        self.networkManager.fetchFilmActors(idMovie: idMovie) { (result) in
             switch result {
-                
+
             case .success(let FilmActorsData):
-                print(FilmActorsData.id)
-                print(FilmActorsData.cast[indexCell].name)
-                print(FilmActorsData.cast[indexCell].profile_photo)
-                print(FilmActorsData.cast[indexCell].character)
+
                 self.nameLabel.text = FilmActorsData.cast[indexCell].name
                 self.roleLabel.text = FilmActorsData.cast[indexCell].character
-//                self.nameLabel.text = nameActor
-//                self.roleLabel.text = characterActor
-                
-                
+
                 self.networkManager.getImageFilm(urlImage: FilmActorsData.cast[indexCell].profile_photo) { (result) in
                     switch result {
                     case .success(let data):
@@ -109,8 +102,24 @@ class ActorsCollectionViewCell: UICollectionViewCell {
                 print(error)
             }
         }
-        
-        
     }
+        
+        
+//    func setupCell(indexCell: Int, nameActor: String, characterActor: String, profile_photo: String) {
+//
+//        self.nameLabel.text = nameActor
+//        self.roleLabel.text = characterActor
+//
+//        self.networkManager.getImageFilm(urlImage: profile_photo) { (result) in
+//            switch result {
+//            case .success(let data):
+//                self.photoView.image = UIImage (data: data)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//    }
+    
 }
+
 

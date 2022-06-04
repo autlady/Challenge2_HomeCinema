@@ -12,8 +12,22 @@ class StartViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var titles = ["Popular", "TV Shows", "Continue watching"]
+    
+    //var networkManager = NetworkManager()
+    
+    //var countTopFilms = 0
 
     //    var films: [Film] = []
+    
+    var idMovie = 0
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = false
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +38,19 @@ class StartViewController: UIViewController {
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell") //регистрирую ячейку
         tableView.register(HeaderView.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
         setupButtonsBar()
+        
+        
+//        networkManager.fetchFilmTop { (result) in
+//            switch result {
+//                
+//            case .success(let FilmTopData):
+//                print(FilmTopData.results[0].poster)
+//                self.countTopFilms = FilmTopData.results.count
+//                print(self.countTopFilms)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
         
     }
 
@@ -55,6 +82,16 @@ class StartViewController: UIViewController {
         ])
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToDetail" {
+            if let destinationVC = segue.destination as? SecondViewController {
+                let idMovie = sender as? Int
+                destinationVC.idMovie = idMovie ?? 0
+            }
+            
+        }
+    }
+    
 }
 
 extension StartViewController: UITableViewDataSource, UITableViewDelegate {
@@ -62,31 +99,38 @@ extension StartViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         3
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // количество рядов у таблицы
         return 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         //создаем ячейку
-
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
-
+        cell.delegate = self
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         self.view.bounds.height/3
     }
-
-
+    
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "sectionHeader") as! HeaderView
         view.titleLabel.text = titles[section]
         return view
     }
+}
+
+//MARK: - DidClickCellDelegate
+
+extension StartViewController: DidClickCellDelegate {
+    func didClickCell(_ cell: TableViewCell, id: Int) {
+        self.performSegue(withIdentifier: "goToDetail", sender: id)
+        print("goToDetail - \(id)")
     }
-
-
+}
 

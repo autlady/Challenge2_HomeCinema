@@ -15,6 +15,8 @@ class SecondViewController: UIViewController {
     
     var countActors = 0
     
+    var idMovie = 0
+    
     //var filmActorsDataArray = [Cast]()
     
     @IBOutlet weak var filmImageView: UIImageView!
@@ -44,7 +46,7 @@ class SecondViewController: UIViewController {
         
         //networkManager.delegate = self
         
-        networkManager.fetchFilmInfo(idMovie: 98) { (result) in
+        networkManager.fetchFilmInfo(idMovie: idMovie) { (result) in
             switch result {
             case .success(let FilmData):
                 self.movieTitle.text = FilmData.title
@@ -65,7 +67,7 @@ class SecondViewController: UIViewController {
             }
         }
         
-        networkManager.fetchFilmActors(idMovie: 98) { (result) in
+        networkManager.fetchFilmActors(idMovie: idMovie) { (result) in
             switch result {
 
             case .success(let FilmActorsData):
@@ -119,7 +121,7 @@ extension SecondViewController: UICollectionViewDataSource {
         
         // создаю ячейку        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActorsCollectionViewCell", for: indexPath) as! ActorsCollectionViewCell
-        cell.setupCell(indexCell: indexPath.row)
+        cell.setupCell(indexCell: indexPath.row, idMovie: self.idMovie)
         //cell.setupCell(indexCell: indexPath.row, nameActor: self.filmActorsDataArray[indexPath.row], characterActor: self.filmActorsDataArray[indexPath.row], profile_photo: self.filmActorsDataArray[indexPath.row])
         return cell
     }
