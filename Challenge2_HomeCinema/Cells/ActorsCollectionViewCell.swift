@@ -11,8 +11,6 @@ class ActorsCollectionViewCell: UICollectionViewCell {
     
     var networkManager = NetworkManager()
     
-    var urlActors = "https://image.tmdb.org/t/p/w200/5fZ1JiGfVshoLHwgvdF3TY4bPem.jpg"
-    
     lazy var photoView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -82,19 +80,37 @@ class ActorsCollectionViewCell: UICollectionViewCell {
         ])
     }
 
-    func setupCell() {
-        self.networkManager.getImageFilm(urlImage: self.urlActors) { (result) in
+//    func setupCell(indexCell: Int, nameActor: String, characterActor: String) {
+    func setupCell(indexCell: Int) {
+        
+        self.networkManager.fetchFilmActors(idMovie: 98) { (result) in
             switch result {
-            case .success(let data):
-                print("urlPoster getImageFilm - \(self.urlActors)")
-                self.photoView.image = UIImage (data: data)
+                
+            case .success(let FilmActorsData):
+                print(FilmActorsData.id)
+                print(FilmActorsData.cast[indexCell].name)
+                print(FilmActorsData.cast[indexCell].profile_photo)
+                print(FilmActorsData.cast[indexCell].character)
+                self.nameLabel.text = FilmActorsData.cast[indexCell].name
+                self.roleLabel.text = FilmActorsData.cast[indexCell].character
+//                self.nameLabel.text = nameActor
+//                self.roleLabel.text = characterActor
+                
+                
+                self.networkManager.getImageFilm(urlImage: FilmActorsData.cast[indexCell].profile_photo) { (result) in
+                    switch result {
+                    case .success(let data):
+                        self.photoView.image = UIImage (data: data)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
             case .failure(let error):
                 print(error)
             }
         }
+        
+        
     }
 }
-
-    
-
 

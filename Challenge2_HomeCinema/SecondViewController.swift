@@ -13,6 +13,10 @@ class SecondViewController: UIViewController {
     
     var urlPoster = ""
     
+    var countActors = 0
+    
+    //var filmActorsDataArray = [Cast]()
+    
     @IBOutlet weak var filmImageView: UIImageView!
     
     @IBOutlet weak var actorCollectionView: UICollectionView!
@@ -26,12 +30,14 @@ class SecondViewController: UIViewController {
 
     @IBAction func watchButtonTapped(_ sender: UIButton) {
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .black
-        actorCollectionView.dataSource = self
-        actorCollectionView.delegate = self
+//        actorCollectionView.dataSource = self
+//        actorCollectionView.delegate = self
         actorCollectionView.register(ActorsCollectionViewCell.self, forCellWithReuseIdentifier: "ActorsCollectionViewCell") //регистрирую ячейку
         actorCollectionView.backgroundColor = .black
         movieOverview.backgroundColor = .black
@@ -48,12 +54,31 @@ class SecondViewController: UIViewController {
                 self.networkManager.getImageFilm(urlImage: self.urlPoster) { (result) in
                     switch result {
                     case .success(let data):
-                        print("urlPoster getImageFilm - \(self.urlPoster)")
+                        //print("urlPoster getImageFilm - \(self.urlPoster)")
                         self.filmImageView.image = UIImage (data: data)
                     case .failure(let error):
                         print(error)
                     }
                 }
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+        networkManager.fetchFilmActors(idMovie: 98) { (result) in
+            switch result {
+
+            case .success(let FilmActorsData):
+                print(FilmActorsData.id)
+                print(FilmActorsData.cast[0].name)
+                print(FilmActorsData.cast[0].profile_photo)
+                //print(FilmActorsData)
+                print(FilmActorsData.cast.count)
+                self.countActors = FilmActorsData.cast.count
+                
+                self.actorCollectionView.dataSource = self
+                self.actorCollectionView.delegate = self
+                
             case .failure(let error):
                 print(error)
             }
@@ -87,15 +112,15 @@ extension SecondViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         // количество ячеек
-        6
+        countActors
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        // создаю ячейку
-        
+        // создаю ячейку        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActorsCollectionViewCell", for: indexPath) as! ActorsCollectionViewCell
-        cell.setupCell()
+        cell.setupCell(indexCell: indexPath.row)
+        //cell.setupCell(indexCell: indexPath.row, nameActor: self.filmActorsDataArray[indexPath.row], characterActor: self.filmActorsDataArray[indexPath.row], profile_photo: self.filmActorsDataArray[indexPath.row])
         return cell
     }
 }

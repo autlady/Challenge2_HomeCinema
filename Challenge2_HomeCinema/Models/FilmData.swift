@@ -11,8 +11,9 @@ struct FilmData: Codable {
     var id: Int
     var overview: String
     var title: String
-    var poster : String {
+    var poster: String {
+        guard let poster_path = poster_path else { return "" }
         return "https://image.tmdb.org/t/p/w400" + poster_path
     }
-    var poster_path: String
+    var poster_path: String?
 }
