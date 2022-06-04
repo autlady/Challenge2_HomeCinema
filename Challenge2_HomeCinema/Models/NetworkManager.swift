@@ -12,7 +12,7 @@ struct NetworkManager {
     
     //Загрузка изображений
     func getImageFilm(urlImage: String, completion: @escaping (Result<Data, Error>) -> Void) {
-        //print("urlImage - \(urlImage)")
+        
         guard let imageURL = URL(string: urlImage) else { return }
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: imageURL) { (data, response, error) in

@@ -32,11 +32,10 @@ class TableViewCell: UITableViewCell {
             switch result {
 
             case .success(let FilmTopData):
-                print(FilmTopData.results[0].poster)
+
                 self.countTopFilms = FilmTopData.results.count
-                print(self.countTopFilms)
                 self.filmTopDataArray = FilmTopData.results
-                print(self.filmTopDataArray)
+
                 collectionView.delegate = self
                 collectionView.dataSource = self
                 
@@ -113,7 +112,6 @@ extension TableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //print(self.filmTopDataArray[indexPath.row].id)
         delegate?.didClickCell(self, id: self.filmTopDataArray[indexPath.row].id)
     }
     

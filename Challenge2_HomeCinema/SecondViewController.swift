@@ -123,10 +123,13 @@ extension SecondViewController: UICollectionViewDataSource {
         // создаю ячейку        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActorsCollectionViewCell", for: indexPath) as! ActorsCollectionViewCell
         cell.setupCell(indexCell: indexPath.row, idMovie: self.idMovie)
-        //cell.setupCell(indexCell: indexPath.row, nameActor: self.filmActorsDataArray[indexPath.row], characterActor: self.filmActorsDataArray[indexPath.row], profile_photo: self.filmActorsDataArray[indexPath.row])
+
         return cell
     }
 }
+
+
+
 
 
 ////MARK: - FilmInfoManagerDelegate

@@ -12,10 +12,6 @@ class StartViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var titles = ["Popular", "TV Shows", "Continue watching"]
-    
-    //var networkManager = NetworkManager()
-    
-    //var countTopFilms = 0
 
     var films = [Films]()
     
@@ -37,52 +33,38 @@ class StartViewController: UIViewController {
         tableView.delegate = self
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell") //регистрирую ячейку
         tableView.register(HeaderView.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
-        setupButtonsBar()
-        
-
-        
-//        networkManager.fetchFilmTop { (result) in
-//            switch result {
-//                
-//            case .success(let FilmTopData):
-//                print(FilmTopData.results[0].poster)
-//                self.countTopFilms = FilmTopData.results.count
-//                print(self.countTopFilms)
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
+//        setupButtonsBar()
 
         
     }
 
-    private lazy var buttonsBar: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 20
-        view.backgroundColor = .red
-        view.clipsToBounds = true
-                
-        return view
-    }()
+//    private lazy var buttonsBar: UIView = {
+//        let view = UIView()
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.layer.cornerRadius = 20
+//        view.backgroundColor = .red
+//        view.clipsToBounds = true
+//
+//        return view
+//    }()
     
-    private func setupButtonsBar() {
-        self.view.addSubview(buttonsBar)
-
-        buttonsBar.layer.shadowColor = UIColor.white.cgColor
-        buttonsBar.layer.shadowOffset = CGSize(width: 0, height: 10)
-        buttonsBar.layer.shadowRadius = 20
-        buttonsBar.layer.shadowOpacity = 0.3
-        buttonsBar.layer.masksToBounds = false
-        
-        NSLayoutConstraint.activate([
-            buttonsBar.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.bounds.height * 0.06),
-            buttonsBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.bounds.width/5),
-            buttonsBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -view.bounds.width/5),
-            buttonsBar.topAnchor.constraint(equalTo: view.topAnchor,  constant: view.bounds.height * 0.88)
-        
-        ])
-    }
+//    private func setupButtonsBar() {
+//        self.view.addSubview(buttonsBar)
+//
+//        buttonsBar.layer.shadowColor = UIColor.white.cgColor
+//        buttonsBar.layer.shadowOffset = CGSize(width: 0, height: 10)
+//        buttonsBar.layer.shadowRadius = 20
+//        buttonsBar.layer.shadowOpacity = 0.3
+//        buttonsBar.layer.masksToBounds = false
+//
+//        NSLayoutConstraint.activate([
+//            buttonsBar.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -view.bounds.height * 0.06),
+//            buttonsBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.bounds.width/5),
+//            buttonsBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -view.bounds.width/5),
+//            buttonsBar.topAnchor.constraint(equalTo: view.topAnchor,  constant: view.bounds.height * 0.88)
+//
+//        ])
+//    }
     
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4BC2BF6B2845096D00126991 /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC2BF6A2845096D00126991 /* Film.swift */; };
 		4BC2BF6F28450C7200126991 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC2BF6E28450C7200126991 /* TableViewCell.swift */; };
 		4BC2BF7128450F9700126991 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC2BF7028450F9700126991 /* CollectionViewCell.swift */; };
 		4BC2BF732847F9CA00126991 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BC2BF722847F9CA00126991 /* Main.storyboard */; };
@@ -26,7 +25,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4BC2BF6A2845096D00126991 /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
 		4BC2BF6E28450C7200126991 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		4BC2BF7028450F9700126991 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		4BC2BF722847F9CA00126991 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -60,7 +58,6 @@
 		4BC2BF692845094B00126991 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4BC2BF6A2845096D00126991 /* Film.swift */,
 				C1D53006284A471B00B1315F /* FilmData.swift */,
 				C1D5300A284A4DEF00B1315F /* FilmActorsData.swift */,
 				C163DF80284B75A100B52514 /* FilmTopData.swift */,
@@ -207,7 +204,6 @@
 				4BC2BF7128450F9700126991 /* CollectionViewCell.swift in Sources */,
 				C1D53009284A478600B1315F /* NetworkManager.swift in Sources */,
 				C163DF81284B75A100B52514 /* FilmTopData.swift in Sources */,
-				4BC2BF6B2845096D00126991 /* Film.swift in Sources */,
 				C1D53007284A471B00B1315F /* FilmData.swift in Sources */,
 				B4885B432846275A00A8CD0E /* ActorsCollectionViewCell.swift in Sources */,
 				B4885B4128461FEC00A8CD0E /* SecondViewController.swift in Sources */,

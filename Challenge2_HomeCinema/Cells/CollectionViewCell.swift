@@ -8,9 +8,10 @@
 import UIKit
 
 
-class CollectionViewCell: UICollectionViewCell, UICollectionViewDataSource {
+class CollectionViewCell: UICollectionViewCell {
 
-var networkManager = NetworkManager()
+    var networkManager = NetworkManager()
+    
     lazy var photoView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -68,8 +69,8 @@ var networkManager = NetworkManager()
             nameLabel.bottomAnchor.constraint(equalTo: dateLabel.topAnchor),
             nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            dateLabel.heightAnchor.constraint(equalToConstant: 20)
-            //MARK: здесь нужно было nameLabel ? или dateLabel
+            nameLabel.heightAnchor.constraint(equalToConstant: 20)
+            
         ])
         
         NSLayoutConstraint.activate([
