@@ -78,6 +78,7 @@ class ActorsCollectionViewCell: UICollectionViewCell {
         ])
     }
 
+    
     func setupCell() {
         photoView.image = UIImage(named: "film")
     }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell {
+class CollectionViewCell: UICollectionViewCell, UICollectionViewDataSource {
 
     lazy var photoView: UIImageView = {
         let imageView = UIImageView()
@@ -19,7 +19,7 @@ class CollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    private lazy var nameLabel: UILabel = {
+    lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .black
@@ -30,7 +30,7 @@ class CollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var dateLabel: UILabel = {
+    lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .black
@@ -67,6 +67,7 @@ class CollectionViewCell: UICollectionViewCell {
             nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             dateLabel.heightAnchor.constraint(equalToConstant: 20)
+            //MARK: здесь нужно было nameLabel ? или dateLabel
         ])
         
         NSLayoutConstraint.activate([
@@ -77,9 +78,35 @@ class CollectionViewCell: UICollectionViewCell {
         ])
     }
 
+    
+    
     func setupCell() {
-        photoView.image = UIImage(named: "film")
-        
+
+        photoView.downloaded(from: defaultImageUrl + films[0].poster_path, contentMode: .scaleAspectFit)
+        nameLabel.text = films[0].title
+        dateLabel.text = films[0].release_date
     }
+    
+    
+    
+    // Записываем данные в ячейки
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
+        
+        
+        cell.nameLabel.text = films[indexPath.row].title
+        cell.dateLabel.text = films[indexPath.row].release_date
+        cell.photoView.downloaded(from: (defaultImageUrl + films[indexPath.row].poster_path), contentMode: .scaleAspectFit)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        films.count
+    }
+    
+    
+    
+    
 }
 

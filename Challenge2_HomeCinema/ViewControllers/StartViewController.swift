@@ -13,7 +13,7 @@ class StartViewController: UIViewController {
     
     var titles = ["Popular", "TV Shows", "Continue watching"]
 
-    //    var films: [Film] = []
+    var films = [Films]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +24,10 @@ class StartViewController: UIViewController {
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell") //регистрирую ячейку
         tableView.register(HeaderView.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
         setupButtonsBar()
+        
+        // запуск парсера
+        
+        loadFilmsInfo()
         
     }
 
@@ -55,7 +59,10 @@ class StartViewController: UIViewController {
         ])
     }
     
+    
 }
+
+
 
 extension StartViewController: UITableViewDataSource, UITableViewDelegate {
     
