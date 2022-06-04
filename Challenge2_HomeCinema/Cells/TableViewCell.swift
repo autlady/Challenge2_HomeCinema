@@ -7,7 +7,19 @@
 
 import UIKit
 
+protocol DidClickCellDelegate {
+    func didClickCell(_ cell: TableViewCell, id: Int)
+}
+
 class TableViewCell: UITableViewCell {
+    
+    var delegate: DidClickCellDelegate?
+    
+    var networkManager = NetworkManager()
+
+    var countTopFilms = 0
+    
+    var filmTopDataArray = [Films]()
 
     private lazy var filmCollection: UICollectionView = { //создаю collectionview
         let layout = UICollectionViewFlowLayout()
@@ -15,15 +27,33 @@ class TableViewCell: UITableViewCell {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .black
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.delegate = self
-        collectionView.dataSource = self
+        
+        networkManager.fetchFilmTop { (result) in
+            switch result {
+
+            case .success(let FilmTopData):
+                print(FilmTopData.results[0].poster)
+                self.countTopFilms = FilmTopData.results.count
+                print(self.countTopFilms)
+                self.filmTopDataArray = FilmTopData.results
+                print(self.filmTopDataArray)
+                collectionView.delegate = self
+                collectionView.dataSource = self
+                
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
         collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: "CollectionViewCell") // регистрирую ячейку в collectionview
         return collectionView
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(style: style, reuseIdentifier: reuseIdentifier)        
         self.backgroundColor = .black
+        
         setupView()
     }
 
@@ -45,6 +75,7 @@ class TableViewCell: UITableViewCell {
             filmCollection.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -inset),
 
         ])
+        
     }
 }
 
@@ -69,7 +100,7 @@ extension TableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
         // количество ячеек
-        12
+        countTopFilms
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -77,8 +108,15 @@ extension TableViewCell: UICollectionViewDataSource {
         // создаю ячейку
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
-        cell.setupCell()
+        cell.setupCell(indexCell: indexPath.row)
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //print(self.filmTopDataArray[indexPath.row].id)
+        delegate?.didClickCell(self, id: self.filmTopDataArray[indexPath.row].id)
+    }
+    
+    
 }
 

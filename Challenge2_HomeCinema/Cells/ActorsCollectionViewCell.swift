@@ -9,6 +9,8 @@ import UIKit
 
 class ActorsCollectionViewCell: UICollectionViewCell {
     
+    var networkManager = NetworkManager()
+    
     lazy var photoView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -78,12 +80,48 @@ class ActorsCollectionViewCell: UICollectionViewCell {
         ])
     }
 
-    
-    func setupCell() {
-        photoView.image = UIImage(named: "film")
-    }
-}
 
+    func setupCell(indexCell: Int, idMovie: Int) {
+
+        self.networkManager.fetchFilmActors(idMovie: idMovie) { (result) in
+            switch result {
+
+            case .success(let FilmActorsData):
+ 
+
+                self.nameLabel.text = FilmActorsData.cast[indexCell].name
+                self.roleLabel.text = FilmActorsData.cast[indexCell].character
+
+                self.networkManager.getImageFilm(urlImage: FilmActorsData.cast[indexCell].profile_photo) { (result) in
+                    switch result {
+                    case .success(let data):
+                        self.photoView.image = UIImage (data: data)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+        
+        
+//    func setupCell(indexCell: Int, nameActor: String, characterActor: String, profile_photo: String) {
+//
+//        self.nameLabel.text = nameActor
+//        self.roleLabel.text = characterActor
+//
+//        self.networkManager.getImageFilm(urlImage: profile_photo) { (result) in
+//            switch result {
+//            case .success(let data):
+//                self.photoView.image = UIImage (data: data)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//    }
     
+}
 
 

@@ -7,8 +7,10 @@
 
 import UIKit
 
+
 class CollectionViewCell: UICollectionViewCell, UICollectionViewDataSource {
 
+var networkManager = NetworkManager()
     lazy var photoView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -78,31 +80,30 @@ class CollectionViewCell: UICollectionViewCell, UICollectionViewDataSource {
         ])
     }
 
-    
-    
-    func setupCell() {
 
-        photoView.downloaded(from: defaultImageUrl + films[0].poster_path, contentMode: .scaleAspectFit)
-        nameLabel.text = films[0].title
-        dateLabel.text = films[0].release_date
-    }
-    
-    
-    
-    // Записываем данные в ячейки
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
-        
-        
-        cell.nameLabel.text = films[indexPath.row].title
-        cell.dateLabel.text = films[indexPath.row].release_date
-        cell.photoView.downloaded(from: (defaultImageUrl + films[indexPath.row].poster_path), contentMode: .scaleAspectFit)
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        films.count
+    func setupCell(indexCell: Int) {
+        self.networkManager.fetchFilmTop { (result) in
+            
+            switch result {
+                
+            case .success(let FilmTopData):
+                                
+                self.nameLabel.text = FilmTopData.results[indexCell].title
+                self.dateLabel.text = FilmTopData.results[indexCell].release_date
+                
+                self.networkManager.getImageFilm(urlImage: FilmTopData.results[indexCell].poster) { (result) in
+                    switch result {
+                    case .success(let data):
+                        self.photoView.image = UIImage (data: data)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }        
+
     }
     
     
