@@ -30,9 +30,8 @@ struct NetworkManager {
         task.resume()
     }
     
-    //Парсинг популярных фильмов
-    func fetchFilmTop(completion: @escaping (Result<FilmTopData, Error>) -> Void) {
-        let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=d015925a3cd3c8a114f5dced8b22d262&language=ru-RU&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate"
+    //Универсальный парсер для популярных фильмов и сериалов
+    func fetchMovie<T: Codable>(urlString: String, completion: @escaping (Result<T, Error>) -> Void) {
         guard let url = URL(string: urlString) else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
             DispatchQueue.main.async {
@@ -43,8 +42,8 @@ struct NetworkManager {
                 }
                 guard let data = data else { return }
                 do {
-                    let resultFilmInfo = try JSONDecoder().decode(FilmTopData.self, from: data)
-                    completion(.success(resultFilmInfo))
+                    let resultMovieTop = try JSONDecoder().decode(T.self, from: data)
+                    completion(.success(resultMovieTop))
                 } catch let jsonError {
                     print("Failed to decode JSON", jsonError)
                     completion(.failure(jsonError))
@@ -76,9 +75,14 @@ struct NetworkManager {
         }.resume()
     }
     
-    //Парсинг актеров к фильму
-    func fetchFilmActors(idMovie:Int, completion: @escaping (Result<FilmActorsData, Error>) -> Void) {
-        let urlString = "https://api.themoviedb.org/3/movie/\(idMovie)/credits?api_key=d015925a3cd3c8a114f5dced8b22d262&language=ru-RU"
+    //Парсинг актеров к фильмам и сериалам
+    func fetchFilmActors(idMovie:Int, roleActors: String, completion: @escaping (Result<FilmActorsData, Error>) -> Void) {
+        var urlString = ""
+        if roleActors == "TV" {
+            urlString = "https://api.themoviedb.org/3/tv/\(idMovie)/credits?api_key=d015925a3cd3c8a114f5dced8b22d262&language=ru-RU"
+        } else if roleActors == "FILM" {
+            urlString = "https://api.themoviedb.org/3/movie/\(idMovie)/credits?api_key=d015925a3cd3c8a114f5dced8b22d262&language=ru-RU"
+        }
         print(urlString)
         guard let url = URL(string: urlString) else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -102,7 +106,6 @@ struct NetworkManager {
     
     
 }
-
 
 
 //protocol FilmInfoManagerDelegate {

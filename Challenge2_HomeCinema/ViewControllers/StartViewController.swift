@@ -7,19 +7,13 @@
 
 import UIKit
 
+var indexSection = 0
+
 class StartViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
     var titles = ["Popular", "TV Shows", "Continue watching"]
-    
-    //var networkManager = NetworkManager()
-    
-    //var countTopFilms = 0
-
-    //    var films: [Film] = []
-    
-    var idMovie = 0
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
@@ -39,34 +33,21 @@ class StartViewController: UIViewController {
         tableView.register(HeaderView.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
         setupButtonsBar()
         
-        
-//        networkManager.fetchFilmTop { (result) in
-//            switch result {
-//                
-//            case .success(let FilmTopData):
-//                print(FilmTopData.results[0].poster)
-//                self.countTopFilms = FilmTopData.results.count
-//                print(self.countTopFilms)
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-        
     }
-
+    
     private lazy var buttonsBar: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 20
         view.backgroundColor = .red
         view.clipsToBounds = true
-                
+        
         return view
     }()
     
     private func setupButtonsBar() {
         self.view.addSubview(buttonsBar)
-
+        
         buttonsBar.layer.shadowColor = UIColor.white.cgColor
         buttonsBar.layer.shadowOffset = CGSize(width: 0, height: 10)
         buttonsBar.layer.shadowRadius = 20
@@ -78,7 +59,7 @@ class StartViewController: UIViewController {
             buttonsBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.bounds.width/5),
             buttonsBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -view.bounds.width/5),
             buttonsBar.topAnchor.constraint(equalTo: view.topAnchor,  constant: view.bounds.height * 0.88)
-        
+            
         ])
     }
     
@@ -88,7 +69,6 @@ class StartViewController: UIViewController {
                 let idMovie = sender as? Int
                 destinationVC.idMovie = idMovie ?? 0
             }
-            
         }
     }
     
@@ -104,9 +84,12 @@ extension StartViewController: UITableViewDataSource, UITableViewDelegate {
         // количество рядов у таблицы
         return 1
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //создаем ячейку
+        
+        indexSection = indexPath.section //Временная переменная для хранения текущего номера секции
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
         cell.delegate = self
@@ -116,7 +99,6 @@ extension StartViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         self.view.bounds.height/3
     }
-    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "sectionHeader") as! HeaderView

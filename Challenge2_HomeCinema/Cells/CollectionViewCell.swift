@@ -79,28 +79,29 @@ class CollectionViewCell: UICollectionViewCell {
         ])
     }
 
-    func setupCell(indexCell: Int) {
-        self.networkManager.fetchFilmTop { (result) in
-            
-            switch result {
-                
-            case .success(let FilmTopData):
-                                
-                self.nameLabel.text = FilmTopData.results[indexCell].title
-                self.dateLabel.text = FilmTopData.results[indexCell].release_date
-                
-                self.networkManager.getImageFilm(urlImage: FilmTopData.results[indexCell].poster) { (result) in
-                    switch result {
-                    case .success(let data):
-                        self.photoView.image = UIImage (data: data)
-                    case .failure(let error):
-                        print(error)
-                    }
+    
+    func setupCell(indexCell: Int, titleFilm: String, releaseDate: String, posterFilm: String) {
+        
+        self.nameLabel.text = titleFilm
+        self.dateLabel.text = releaseDate
+        
+        //Загрузка image фильма или сериала в CollectionView
+        if posterFilm != "" {
+            self.networkManager.getImageFilm(urlImage: posterFilm) { (result) in
+                switch result {
+                case .success(let data):
+                    self.photoView.image = UIImage (data: data)
+                case .failure(let error):
+                    print(error)
                 }
-            case .failure(let error):
-                print(error)
             }
-        }        
+        } else {
+            photoView.image = UIImage (named: "film")
+        }
     }
 }
+
+    
+    
+
 

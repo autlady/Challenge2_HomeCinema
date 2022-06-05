@@ -59,19 +59,19 @@
         <scene sceneID="4ZO-mP-mJ7">
             <objects>
                 <viewController id="G5D-PE-ZqY" customClass="SecondViewController" customModule="Challenge2_HomeCinema" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="Weq-3H-Q6j">
+                    <view key="view" contentMode="scaleToFill" id="Weq-3H-Q6j">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="film" translatesAutoresizingMaskIntoConstraints="NO" id="dQE-7k-IGf">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="film" translatesAutoresizingMaskIntoConstraints="NO" id="dQE-7k-IGf">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="400" id="ENk-Si-HTA"/>
                                     <constraint firstAttribute="height" constant="400" id="zsc-Dz-NZ2"/>
                                 </constraints>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kfZ-Q8-yIQ">
-                                <rect key="frame" x="0.0" y="357" width="400" height="60"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kfZ-Q8-yIQ">
+                                <rect key="frame" x="0.0" y="357" width="375" height="60"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Bhm-JD-yWD"/>
@@ -81,7 +81,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Cast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vd0-V1-Wm6">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vd0-V1-Wm6">
                                 <rect key="frame" x="5" y="427" width="70" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="mXy-ar-G6r"/>
@@ -90,8 +90,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IAF-Bp-QQR">
-                                <rect key="frame" x="0.0" y="469" width="400" height="128"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IAF-Bp-QQR">
+                                <rect key="frame" x="0.0" y="469" width="375" height="128"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="6YU-Dk-Ie5"/>
@@ -116,8 +116,8 @@
                                     <action selector="closeButtonTapped:" destination="G5D-PE-ZqY" eventType="touchUpInside" id="xcD-39-vTg"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kit-sd-UpG">
-                                <rect key="frame" x="60" y="627" width="280" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kit-sd-UpG">
+                                <rect key="frame" x="60" y="627" width="255" height="40"/>
                                 <color key="backgroundColor" systemColor="systemRedColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Ri7-1g-0xd"/>
@@ -144,8 +144,8 @@
                                     <action selector="watchButtonTapped:" destination="G5D-PE-ZqY" eventType="touchUpInside" id="j8E-zU-cYz"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Movie Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="njm-Qx-haI">
-                                <rect key="frame" x="0.0" y="302" width="400" height="50"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="njm-Qx-haI">
+                                <rect key="frame" x="0.0" y="302" width="375" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="F4e-Zq-7A3"/>
                                 </constraints>
