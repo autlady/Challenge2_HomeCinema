@@ -7,10 +7,11 @@
 
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell {
-    
-    var networkManager = NetworkManager()
 
+class CollectionViewCell: UICollectionViewCell {
+
+    var networkManager = NetworkManager()
+    
     lazy var photoView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -21,7 +22,7 @@ class CollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    private lazy var nameLabel: UILabel = {
+    lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .black
@@ -32,7 +33,7 @@ class CollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var dateLabel: UILabel = {
+    lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .black
@@ -68,7 +69,8 @@ class CollectionViewCell: UICollectionViewCell {
             nameLabel.bottomAnchor.constraint(equalTo: dateLabel.topAnchor),
             nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            dateLabel.heightAnchor.constraint(equalToConstant: 20)
+            nameLabel.heightAnchor.constraint(equalToConstant: 20)
+            
         ])
         
         NSLayoutConstraint.activate([
@@ -78,6 +80,7 @@ class CollectionViewCell: UICollectionViewCell {
             photoView.bottomAnchor.constraint(equalTo: nameLabel.topAnchor)
         ])
     }
+
 
     
     func setupCell(indexCell: Int, titleFilm: String, releaseDate: String, posterFilm: String) {
@@ -93,12 +96,19 @@ class CollectionViewCell: UICollectionViewCell {
                     self.photoView.image = UIImage (data: data)
                 case .failure(let error):
                     print(error)
+
                 }
             }
+
         } else {
             photoView.image = UIImage (named: "film")
         }
+
     }
+    
+    
+    
+    
 }
 
     

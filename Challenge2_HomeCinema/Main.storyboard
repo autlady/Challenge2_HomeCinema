@@ -81,8 +81,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vd0-V1-Wm6">
+
                                 <rect key="frame" x="5" y="427" width="70" height="40"/>
+
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="mXy-ar-G6r"/>
                                 </constraints>

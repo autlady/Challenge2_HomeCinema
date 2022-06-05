@@ -80,8 +80,10 @@ class ActorsCollectionViewCell: UICollectionViewCell {
         ])
     }
 
+
         
     func setupCell(indexCell: Int, nameActor: String, characterActor: String, profilePhoto: String) {
+
 
         self.nameLabel.text = nameActor
         self.roleLabel.text = characterActor

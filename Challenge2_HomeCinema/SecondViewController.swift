@@ -34,6 +34,7 @@ class SecondViewController: UIViewController {
     
     // Переход на сайт фильма при нажатии на кнопку "Watch now"
     @IBAction func watchButtonTapped(_ sender: UIButton) {
+
         
         if sectionType == "TOPTV" {
             UIApplication.shared.open(URL(string: originalShowUrl + "\(idMovie)")! as URL, options: [:], completionHandler: nil)
@@ -42,6 +43,7 @@ class SecondViewController: UIViewController {
         }
         //UIApplication.shared.open(NSURL(string: "https://www.themoviedb.org/movie/18-the-fifth-element")! as URL)
         
+
     }
     
     override func viewDidLoad() {
@@ -154,10 +156,15 @@ extension SecondViewController: UICollectionViewDataSource {
         
         // создаю ячейку        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActorsCollectionViewCell", for: indexPath) as! ActorsCollectionViewCell
+
         cell.setupCell(indexCell: indexPath.row, nameActor: self.filmActorsDataArray[indexPath.row].name, characterActor: self.filmActorsDataArray[indexPath.row].character, profilePhoto: self.filmActorsDataArray[indexPath.row].profile_photo)
+
         return cell
     }
 }
+
+
+
 
 
 ////MARK: - FilmInfoManagerDelegate

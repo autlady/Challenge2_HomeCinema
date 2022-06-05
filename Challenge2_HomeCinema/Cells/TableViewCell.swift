@@ -30,6 +30,7 @@ class TableViewCell: UITableViewCell {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .black
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+
         //print("IndexSection - \(indexSection)")
         //Кейсы для выбора секции, куда подгружать данные
         switch indexSection {
@@ -44,6 +45,7 @@ class TableViewCell: UITableViewCell {
                 case .failure(let error):
                     print(error)
                 }
+
             }
         case 1:
             networkManager.fetchMovie(urlString: UrlMovie.urlTvTop) { (result: Result<TvTopData, Error>) in
@@ -151,6 +153,7 @@ extension TableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
         print(self.filmTopDataArray)
         print(self.tvTopDataArray)
         
@@ -160,6 +163,7 @@ extension TableViewCell: UICollectionViewDataSource {
             delegate?.didClickCell(self, id: tvTopDataArray[indexPath.row].id, sectionType: "TOPTV")
         }
         
+
     }
     
 }

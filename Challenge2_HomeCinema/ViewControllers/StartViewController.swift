@@ -14,8 +14,10 @@ class StartViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var titles = ["Popular", "TV Shows", "Continue watching"]
+
     
     var sectionType = ""
+
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
@@ -33,19 +35,23 @@ class StartViewController: UIViewController {
         tableView.delegate = self
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell") //регистрирую ячейку
         tableView.register(HeaderView.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
-        //setupButtonsBar()
+
+
+//        setupButtonsBar()
+
         
     }
-    
-    private lazy var buttonsBar: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 20
-        view.backgroundColor = .red
-        view.clipsToBounds = true
-        
-        return view
-    }()
+
+//    private lazy var buttonsBar: UIView = {
+//        let view = UIView()
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.layer.cornerRadius = 20
+//        view.backgroundColor = .red
+//        view.clipsToBounds = true
+//
+//        return view
+//    }()
+
     
 //    private func setupButtonsBar() {
 //        self.view.addSubview(buttonsBar)
@@ -65,6 +71,7 @@ class StartViewController: UIViewController {
 //        ])
 //    }
     
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToDetail" {
             if let destinationVC = segue.destination as? SecondViewController {
@@ -77,8 +84,11 @@ class StartViewController: UIViewController {
             }
         }
     }
+
     
 }
+
+
 
 extension StartViewController: UITableViewDataSource, UITableViewDelegate {
     
