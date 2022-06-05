@@ -13,6 +13,8 @@ class SecondViewController: UIViewController {
     
     var idMovie = 0
     
+    var sectionType = ""
+    
     var originalFilmUrl = "https://www.themoviedb.org/movie/"
 
     var originalShowUrl = "https://www.themoviedb.org/tv/"
@@ -33,13 +35,13 @@ class SecondViewController: UIViewController {
     // Переход на сайт фильма при нажатии на кнопку "Watch now"
     @IBAction func watchButtonTapped(_ sender: UIButton) {
         
-        if indexSection == 1 {
+        if sectionType == "TOPTV" {
             UIApplication.shared.open(URL(string: originalShowUrl + "\(idMovie)")! as URL, options: [:], completionHandler: nil)
-        } else {
+        } else if sectionType == "TOPFILM" {
             UIApplication.shared.open(URL(string: originalFilmUrl + "\(idMovie)")! as URL, options: [:], completionHandler: nil)
         }
         //UIApplication.shared.open(NSURL(string: "https://www.themoviedb.org/movie/18-the-fifth-element")! as URL)
-
+        
     }
     
     override func viewDidLoad() {
@@ -53,7 +55,8 @@ class SecondViewController: UIViewController {
         //networkManager.delegate = self
         
         //Загрузка описания фильма и фото
-        if indexSection == 1 {
+        //print("SectionType - \(sectionType)")
+        if sectionType == "TOPTV" {
             networkManager.fetchFilmInfo(idMovie: idMovie) { (result) in
                 switch result {
                 case .success(let TvTopData):
@@ -71,7 +74,7 @@ class SecondViewController: UIViewController {
                     print(error)
                 }
             }
-        } else {
+        } else if sectionType == "TOPFILM" {
             networkManager.fetchFilmInfo(idMovie: idMovie) { (result) in
                 switch result {
                 case .success(let FilmData):
@@ -92,7 +95,7 @@ class SecondViewController: UIViewController {
         }
         
         //Загрузка данных актеров к фильму и сохранение во временный массив для дальнейшего использования
-        if indexSection == 1 {
+        if sectionType == "TOPTV" {
             networkManager.fetchFilmActors(idMovie: idMovie, roleActors: "TV") { (result) in
                 switch result {
                 case .success(let FilmActorsData):
@@ -103,7 +106,7 @@ class SecondViewController: UIViewController {
                     print(error)
                 }
             }
-        } else {
+        } else if sectionType == "TOPFILM" {
             networkManager.fetchFilmActors(idMovie: idMovie, roleActors: "FILM") { (result) in
                 switch result {
                 case .success(let FilmActorsData):

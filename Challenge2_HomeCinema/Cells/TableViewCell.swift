@@ -9,7 +9,7 @@ import UIKit
 
 //Протокол для возможности вызвать сигвей по клику на ячейку
 protocol DidClickCellDelegate {
-    func didClickCell(_ cell: TableViewCell, id: Int)
+    func didClickCell(_ cell: TableViewCell, id: Int, sectionType: String)
 }
 
 class TableViewCell: UITableViewCell {
@@ -30,7 +30,7 @@ class TableViewCell: UITableViewCell {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .black
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
+        //print("IndexSection - \(indexSection)")
         //Кейсы для выбора секции, куда подгружать данные
         switch indexSection {
         case 0:
@@ -151,11 +151,13 @@ extension TableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(self.filmTopDataArray)
+        print(self.tvTopDataArray)
         
         if self.filmTopDataArray.isEmpty == false {
-            delegate?.didClickCell(self, id: filmTopDataArray[indexPath.row].id)
+            delegate?.didClickCell(self, id: filmTopDataArray[indexPath.row].id, sectionType: "TOPFILM")
         } else if self.tvTopDataArray.isEmpty == false {
-            delegate?.didClickCell(self, id: tvTopDataArray[indexPath.row].id)
+            delegate?.didClickCell(self, id: tvTopDataArray[indexPath.row].id, sectionType: "TOPTV")
         }
         
     }
