@@ -112,7 +112,7 @@ extension StartViewController: UITableViewDataSource, UITableViewDelegate {
 extension StartViewController: DidClickCellDelegate {
     func didClickCell(_ cell: TableViewCell, id: Int) {
         self.performSegue(withIdentifier: "goToDetail", sender: id)
-        print("goToDetail - \(id)")
+        //print("goToDetail - \(id)")
     }
 }
 
