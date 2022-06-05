@@ -7,15 +7,17 @@
 
 import UIKit
 
+var indexSection = 0
+
 class StartViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
     var titles = ["Popular", "TV Shows", "Continue watching"]
 
-    var films = [Films]()
     
-    var idMovie = 0
+    var sectionType = ""
+
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
@@ -33,6 +35,8 @@ class StartViewController: UIViewController {
         tableView.delegate = self
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell") //регистрирую ячейку
         tableView.register(HeaderView.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
+
+
 //        setupButtonsBar()
 
         
@@ -47,6 +51,7 @@ class StartViewController: UIViewController {
 //
 //        return view
 //    }()
+
     
 //    private func setupButtonsBar() {
 //        self.view.addSubview(buttonsBar)
@@ -72,8 +77,11 @@ class StartViewController: UIViewController {
             if let destinationVC = segue.destination as? SecondViewController {
                 let idMovie = sender as? Int
                 destinationVC.idMovie = idMovie ?? 0
+                DispatchQueue.main.async {
+                    destinationVC.sectionType = self.sectionType
+                }
+                
             }
-            
         }
     }
 
@@ -92,9 +100,12 @@ extension StartViewController: UITableViewDataSource, UITableViewDelegate {
         // количество рядов у таблицы
         return 1
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //создаем ячейку
+        
+        indexSection = indexPath.section //Временная переменная для хранения текущего номера секции
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
         cell.delegate = self
@@ -104,7 +115,6 @@ extension StartViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         self.view.bounds.height/3
     }
-    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "sectionHeader") as! HeaderView
@@ -116,9 +126,11 @@ extension StartViewController: UITableViewDataSource, UITableViewDelegate {
 //MARK: - DidClickCellDelegate
 
 extension StartViewController: DidClickCellDelegate {
-    func didClickCell(_ cell: TableViewCell, id: Int) {
+    func didClickCell(_ cell: TableViewCell, id: Int, sectionType: String) {
         self.performSegue(withIdentifier: "goToDetail", sender: id)
-        print("goToDetail - \(id)")
+        self.sectionType = sectionType
+        //print("SectionType - \(self.sectionType)")
+        //print("goToDetail - \(id)")
     }
 }
 

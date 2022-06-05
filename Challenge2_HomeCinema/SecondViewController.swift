@@ -9,15 +9,17 @@ import UIKit
 
 class SecondViewController: UIViewController {
     
-    var networkManager = NetworkManager()
-    
-    var urlPoster = ""
-    
-    var countActors = 0
+    var networkManager = NetworkManager()    
     
     var idMovie = 0
     
-    //var filmActorsDataArray = [Cast]()
+    var sectionType = ""
+    
+    var originalFilmUrl = "https://www.themoviedb.org/movie/"
+
+    var originalShowUrl = "https://www.themoviedb.org/tv/"
+    
+    var filmActorsDataArray = [Cast]()
     
     @IBOutlet weak var filmImageView: UIImageView!
     
@@ -29,61 +31,93 @@ class SecondViewController: UIViewController {
 
     @IBAction func closeButtonTapped(_ sender: UIButton) {
     }
-
+    
+    // Переход на сайт фильма при нажатии на кнопку "Watch now"
     @IBAction func watchButtonTapped(_ sender: UIButton) {
-        UIApplication.shared.open(NSURL(string: "https://www.themoviedb.org/movie/18-the-fifth-element")! as URL)
-    }
 
+        
+        if sectionType == "TOPTV" {
+            UIApplication.shared.open(URL(string: originalShowUrl + "\(idMovie)")! as URL, options: [:], completionHandler: nil)
+        } else if sectionType == "TOPFILM" {
+            UIApplication.shared.open(URL(string: originalFilmUrl + "\(idMovie)")! as URL, options: [:], completionHandler: nil)
+        }
+        //UIApplication.shared.open(NSURL(string: "https://www.themoviedb.org/movie/18-the-fifth-element")! as URL)
+        
+
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .black
-//        actorCollectionView.dataSource = self
-//        actorCollectionView.delegate = self
         actorCollectionView.register(ActorsCollectionViewCell.self, forCellWithReuseIdentifier: "ActorsCollectionViewCell") //регистрирую ячейку
         actorCollectionView.backgroundColor = .black
         movieOverview.backgroundColor = .black
         
         //networkManager.delegate = self
         
-        networkManager.fetchFilmInfo(idMovie: idMovie) { (result) in
-            switch result {
-            case .success(let FilmData):
-                self.movieTitle.text = FilmData.title
-                self.movieOverview.text = FilmData.overview
-                self.urlPoster = FilmData.poster
-                
-                self.networkManager.getImageFilm(urlImage: self.urlPoster) { (result) in
-                    switch result {
-                    case .success(let data):
-                        //print("urlPoster getImageFilm - \(self.urlPoster)")
-                        self.filmImageView.image = UIImage (data: data)
-                    case .failure(let error):
-                        print(error)
+        //Загрузка описания фильма и фото
+        //print("SectionType - \(sectionType)")
+        if sectionType == "TOPTV" {
+            networkManager.fetchFilmInfo(idMovie: idMovie) { (result) in
+                switch result {
+                case .success(let TvTopData):
+                    self.movieTitle.text = TvTopData.title
+                    self.movieOverview.text = TvTopData.overview
+                    self.networkManager.getImageFilm(urlImage: TvTopData.poster) { (result) in
+                        switch result {
+                        case .success(let data):
+                            self.filmImageView.image = UIImage (data: data)
+                        case .failure(let error):
+                            print(error)
+                        }
                     }
+                case .failure(let error):
+                    print(error)
                 }
-            case .failure(let error):
-                print(error)
+            }
+        } else if sectionType == "TOPFILM" {
+            networkManager.fetchFilmInfo(idMovie: idMovie) { (result) in
+                switch result {
+                case .success(let FilmData):
+                    self.movieTitle.text = FilmData.title
+                    self.movieOverview.text = FilmData.overview
+                    self.networkManager.getImageFilm(urlImage: FilmData.poster) { (result) in
+                        switch result {
+                        case .success(let data):
+                            self.filmImageView.image = UIImage (data: data)
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
+                case .failure(let error):
+                    print(error)
+                }
             }
         }
         
-        networkManager.fetchFilmActors(idMovie: idMovie) { (result) in
-            switch result {
-
-            case .success(let FilmActorsData):
-                print(FilmActorsData.id)
-                print(FilmActorsData.cast[0].name)
-                print(FilmActorsData.cast[0].profile_photo)
-                //print(FilmActorsData)
-                print(FilmActorsData.cast.count)
-                self.countActors = FilmActorsData.cast.count
-                
-                self.actorCollectionView.dataSource = self
-                self.actorCollectionView.delegate = self
-                
-            case .failure(let error):
-                print(error)
+        //Загрузка данных актеров к фильму и сохранение во временный массив для дальнейшего использования
+        if sectionType == "TOPTV" {
+            networkManager.fetchFilmActors(idMovie: idMovie, roleActors: "TV") { (result) in
+                switch result {
+                case .success(let FilmActorsData):
+                    self.filmActorsDataArray = FilmActorsData.cast
+                    self.actorCollectionView.dataSource = self
+                    self.actorCollectionView.delegate = self
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        } else if sectionType == "TOPFILM" {
+            networkManager.fetchFilmActors(idMovie: idMovie, roleActors: "FILM") { (result) in
+                switch result {
+                case .success(let FilmActorsData):
+                    self.filmActorsDataArray = FilmActorsData.cast
+                    self.actorCollectionView.dataSource = self
+                    self.actorCollectionView.delegate = self
+                case .failure(let error):
+                    print(error)
+                }
             }
         }
         
@@ -115,14 +149,15 @@ extension SecondViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         // количество ячеек
-        countActors
+        self.filmActorsDataArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         // создаю ячейку        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActorsCollectionViewCell", for: indexPath) as! ActorsCollectionViewCell
-        cell.setupCell(indexCell: indexPath.row, idMovie: self.idMovie)
+
+        cell.setupCell(indexCell: indexPath.row, nameActor: self.filmActorsDataArray[indexPath.row].name, characterActor: self.filmActorsDataArray[indexPath.row].character, profilePhoto: self.filmActorsDataArray[indexPath.row].profile_photo)
 
         return cell
     }
@@ -148,3 +183,6 @@ extension SecondViewController: UICollectionViewDataSource {
 //        print(error)
 //    }
 //}
+
+
+
